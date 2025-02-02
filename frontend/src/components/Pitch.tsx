@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Pitch.css';
+import playerIcon from '../../public/player.ico';
+import 'country-flag-icons/3x2/flags.css';
 
 interface Player {
   name: string;
@@ -16,6 +18,17 @@ const Pitch: React.FC<PitchProps> = ({ players }) => {
 
   const handleGuessChange = (playerName: string, guess: string) => {
     setGuesses((prev) => ({ ...prev, [playerName]: guess }));
+  };
+
+  // Function to display asterisks with spaces
+  const displayAsterisks = (name: string) => {
+    return name.split('').map((char) => (char === ' ' ? ' ' : '*')).join('');
+  };
+
+  // Function to get flag class based on nationality
+  const getFlagClass = (nationality: string) => {
+    const countryCode = nationality.toLowerCase();
+    return `fi fi-${countryCode}`;
   };
 
   // Group players by position
@@ -41,12 +54,14 @@ const Pitch: React.FC<PitchProps> = ({ players }) => {
         {positions['Goalkeeper'].map((player, index) => (
           <div key={index} className="player">
             <div className="player-guess">
-              {'*'.repeat(player.name.length)}
+              <div className="player-name">{displayAsterisks(player.name)}</div>
+              <img src={playerIcon} alt="Player" className="player-icon" />
+              <span className={getFlagClass(player.nationality)}></span>
               <input
                 type="text"
                 value={guesses[player.name] || ''}
                 onChange={(e) => handleGuessChange(player.name, e.target.value)}
-                placeholder="Guess the player"
+                placeholder="Name"
               />
               {guesses[player.name] && (
                 <span className="validation">
@@ -62,17 +77,19 @@ const Pitch: React.FC<PitchProps> = ({ players }) => {
 
       {/* Defenders */}
       <div className="defenders">
-        {/* Left Back */}
-        <div className="left-back">
-          {positions['Left Back'].map((player, index) => (
+        {/* Right Back */}
+        <div className="right-back">
+          {positions['Right Back'].map((player, index) => (
             <div key={index} className="player">
               <div className="player-guess">
-                {'*'.repeat(player.name.length)}
+                <div className="player-name">{displayAsterisks(player.name)}</div>
+                <img src={playerIcon} alt="Player" className="player-icon" />
+                <span className={getFlagClass(player.nationality)}></span>
                 <input
                   type="text"
                   value={guesses[player.name] || ''}
                   onChange={(e) => handleGuessChange(player.name, e.target.value)}
-                  placeholder="Guess the player"
+                  placeholder="Name"
                 />
                 {guesses[player.name] && (
                   <span className="validation">
@@ -91,12 +108,14 @@ const Pitch: React.FC<PitchProps> = ({ players }) => {
           {positions['Center Back'].map((player, index) => (
             <div key={index} className="player">
               <div className="player-guess">
-                {'*'.repeat(player.name.length)}
+                <div className="player-name">{displayAsterisks(player.name)}</div>
+                <img src={playerIcon} alt="Player" className="player-icon" />
+                <span className={getFlagClass(player.nationality)}></span>
                 <input
                   type="text"
                   value={guesses[player.name] || ''}
                   onChange={(e) => handleGuessChange(player.name, e.target.value)}
-                  placeholder="Guess the player"
+                  placeholder="Name"
                 />
                 {guesses[player.name] && (
                   <span className="validation">
@@ -110,17 +129,19 @@ const Pitch: React.FC<PitchProps> = ({ players }) => {
           ))}
         </div>
 
-        {/* Right Back */}
-        <div className="right-back">
-          {positions['Right Back'].map((player, index) => (
+                {/* Left Back */}
+                <div className="left-back">
+          {positions['Left Back'].map((player, index) => (
             <div key={index} className="player">
               <div className="player-guess">
-                {'*'.repeat(player.name.length)}
+                <div className="player-name">{displayAsterisks(player.name)}</div>
+                <img src={playerIcon} alt="Player" className="player-icon" />
+                <span className={getFlagClass(player.nationality)}></span>
                 <input
                   type="text"
                   value={guesses[player.name] || ''}
                   onChange={(e) => handleGuessChange(player.name, e.target.value)}
-                  placeholder="Guess the player"
+                  placeholder="Name"
                 />
                 {guesses[player.name] && (
                   <span className="validation">
@@ -140,12 +161,14 @@ const Pitch: React.FC<PitchProps> = ({ players }) => {
         {positions['Midfielder'].map((player, index) => (
           <div key={index} className="player">
             <div className="player-guess">
-              {'*'.repeat(player.name.length)}
+              <div className="player-name">{displayAsterisks(player.name)}</div>
+              <img src={playerIcon} alt="Player" className="player-icon" />
+              <span className={getFlagClass(player.nationality)}></span>
               <input
                 type="text"
                 value={guesses[player.name] || ''}
                 onChange={(e) => handleGuessChange(player.name, e.target.value)}
-                placeholder="Guess the player"
+                placeholder="Name"
               />
               {guesses[player.name] && (
                 <span className="validation">
@@ -164,12 +187,14 @@ const Pitch: React.FC<PitchProps> = ({ players }) => {
         {positions['Attacker'].map((player, index) => (
           <div key={index} className="player">
             <div className="player-guess">
-              {'*'.repeat(player.name.length)}
+              <div className="player-name">{displayAsterisks(player.name)}</div>
+              <img src={playerIcon} alt="Player" className="player-icon" />
+              <span className={getFlagClass(player.nationality)}></span>
               <input
                 type="text"
                 value={guesses[player.name] || ''}
                 onChange={(e) => handleGuessChange(player.name, e.target.value)}
-                placeholder="Guess the player"
+                placeholder="Name"
               />
               {guesses[player.name] && (
                 <span className="validation">

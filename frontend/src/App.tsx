@@ -25,9 +25,11 @@ const App: React.FC = () => {
     const fetchSquads = async () => {
       try {
         const squads = await getSquads();
-        setSquads(squads);
-        if (squads.length > 0) {
-          setSelectedSquad(squads[0]); // Default to the first squad
+        // Randomize the squads array
+        const randomizedSquads = squads.sort(() => Math.random() - 0.5);
+        setSquads(randomizedSquads);
+        if (randomizedSquads.length > 0) {
+          setSelectedSquad(randomizedSquads[0]); // Default to the first squad
         }
       } catch (error) {
         console.error('Error fetching squads:', error);
@@ -49,9 +51,19 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <h1>{selectedSquad.team} ({selectedSquad.year})</h1>
-      <button onClick={handleNextSquad}>Next Squad</button>
-      <Pitch players={selectedSquad.players} />
+      <header className="header">
+        <h1>Guess the players in the squad!</h1>
+      </header>
+      <main>
+        <div className="squad-info">
+          <h2>{selectedSquad.team} ({selectedSquad.year})</h2>
+          <button onClick={handleNextSquad}>Next Squad</button>
+        </div>
+        <Pitch players={selectedSquad.players} />
+      </main>
+      <footer className="footer">
+        <p>Made by filipegarcia.co</p>
+      </footer>
     </div>
   );
 };
