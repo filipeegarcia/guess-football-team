@@ -16,7 +16,7 @@ connectDB();
 
 // Routes
 app.get('/', (req, res) => {
-    res.send('Missing 11 Backend');
+    res.send('Guess the Football Team API');
 });
 
 // Start server
